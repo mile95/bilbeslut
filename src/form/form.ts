@@ -17,69 +17,48 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class FormComponent implements OnInit {
   form!: FormGroup;
 
-  upplaggOptions = [
-    { label: 'Ny bil', controlName: 'ny' },
-    { label: 'Leasing', controlName: 'leasing' },
-    { label: 'Begagnad', controlName: 'privatKopBegagnad' },
+  arrangementOptions = [
+    { label: 'Privateasing', controlName: 'leasing' },
   ];
 
-  drivmedelOptions = [
+  fuelOptions = [
     { label: 'Bensin', controlName: 'bensin' },
     { label: 'Diesel', controlName: 'diesel' },
     { label: 'El', controlName: 'el' },
     { label: 'Hybrid', controlName: 'hybrid' },
   ];
 
-  bilmarkenOptions = [
-    'Volvo',
-    'Volkswagen',
-    'Toyota',
-    'Ford',
-    'BMW',
-    'Audi',
-    'Tesla',
-    'Skoda',
-    'Mercedes',
-    'Hyundai',
-  ];
-
   constructor(private fb: FormBuilder) { }
-
   ngOnInit(): void {
-    const upplaggControls = this.upplaggOptions.reduce((acc, option) => {
+    const arrangementControls = this.arrangementOptions.reduce((acc, option) => {
       acc[option.controlName] = [false];
       return acc;
     }, {} as { [key: string]: any });
 
-    const drivmedelControls = this.drivmedelOptions.reduce((acc, option) => {
+    const fuelControls = this.fuelOptions.reduce((acc, option) => {
       acc[option.controlName] = [false];
       return acc;
     }, {} as { [key: string]: any });
 
     this.form = this.fb.group({
-      ...upplaggControls,
-      ...drivmedelControls,
-
-      bilmärken: [this.bilmarkenOptions], // default: alla valda
+      ...arrangementControls,
+      ...fuelControls,
     });
   }
 
   onSubmit() {
     if (this.form.valid) {
-      const valdaUpplagg = this.upplaggOptions
+      const selectedArrangements = this.arrangementOptions
         .filter((opt) => this.form.get(opt.controlName)?.value)
         .map((opt) => opt.label);
 
-      const valdaDrivmedel = this.drivmedelOptions
+      const selectedFuels = this.fuelOptions
         .filter((opt) => this.form.get(opt.controlName)?.value)
         .map((opt) => opt.label);
-
-      const valdaBilmarken = this.form.value.bilmärken;
 
       const data = {
-        upplagg: valdaUpplagg,
-        drivmedel: valdaDrivmedel,
-        bilmärken: valdaBilmarken,
+        arrangements: selectedArrangements,
+        fuels: selectedFuels,
       };
 
       console.log('Form data:', data);

@@ -1,27 +1,19 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="form" class="max-w-md mx-auto p-4 bg-white rounded shadow">
-
     <h2 class="text-xl font-semibold mb-4">Välj möjliga upplägg</h2>
     <div class="mb-4">
-        <label *ngFor="let option of upplaggOptions" class="flex items-center mb-2 cursor-pointer">
+        <label *ngFor="let option of arrangementOptions" class="flex items-center mb-2 cursor-pointer">
             <input type="checkbox" [formControlName]="option.controlName" class="mr-2" />
             {{ option.label }}
         </label>
     </div>
 
 
-    <h2 class="text-xl font-semibold mb-4">Välj drivmedel</h2>
+    <h2 class="text-lg font-semibold mb-4">Välj drivmedel</h2>
     <div class="mb-4">
-        <label *ngFor="let fuel of drivmedelOptions" class="flex items-center mb-2 cursor-pointer">
+        <label *ngFor="let fuel of fuelOptions" class="flex items-center mb-2 cursor-pointer">
             <input type="checkbox" [formControlName]="fuel.controlName" class="mr-2" />
             {{ fuel.label }}
         </label>
-    </div>
-
-    <div class="mb-4">
-        <label for="bilmärken" class="block mb-1 font-medium">Välj bilmärken (flera val möjliga)</label>
-        <select id="bilmärken" formControlName="bilmärken" multiple size="5" class="w-full p-2 border rounded">
-            <option *ngFor="let brand of bilmarkenOptions" [value]="brand">{{ brand }}</option>
-        </select>
     </div>
 
 
