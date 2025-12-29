@@ -1,0 +1,82 @@
+<div class="border rounded-lg p-6 shadow-md flex flex-col w-80 hover:bg-slate-100 transition duration-300">
+
+    <!-- Header: Märke, modell och bränsletyp badge -->
+    <div class="flex justify-between items-center mb-4">
+        <div>
+            <h3 class="text-xl font-bold text-gray-900">
+                {{ privateLeasing.brand }} {{ privateLeasing.model }}
+            </h3>
+            <p class="text-sm text-gray-600" *ngIf="privateLeasing.trim">
+                {{ privateLeasing.trim }}
+            </p>
+        </div>
+
+        <span class="text-xs font-semibold px-3 py-1 rounded-full" [ngClass]="getfuelBadgeClass()">
+            {{ privateLeasing.fuelType }}
+        </span>
+    </div>
+
+    <!-- Leasingperiod -->
+    <div class="mb-4">
+        <p class="text-sm font-semibold text-gray-600">Leasingperiod</p>
+        <p class="text-base text-gray-800">{{ privateLeasing.standardDurationInMonths }} månader</p>
+    </div>
+
+    <!-- Viktigaste: Månadskostnad -->
+    <div class="mb-5">
+        <p class="text-sm uppercase font-semibold text-gray-500 tracking-wide">Månadskostnad</p>
+        <div class="text-3xl font-extrabold text-blue-700">
+            {{ privateLeasing.getTotalMonthlyCost() | number }} kr <span class="text-base font-normal">/ mån</span>
+        </div>
+    </div>
+
+    <!-- Total kostnad hela perioden -->
+    <div class="mb-6">
+        <p class="text-sm uppercase font-semibold text-gray-500 tracking-wide">Total kostnad</p>
+        <p class="text-lg font-semibold text-gray-800">
+            {{ privateLeasing.getTotalCostForFullLeaseInSek() | number }} kr
+        </p>
+    </div>
+
+    <!-- Detaljerade månadsdelar -->
+    <div class="mb-6 text-gray-700 text-sm space-y-2">
+        <div class="flex justify-between">
+            <span>Baspris <span class="text-xs text-gray-400">kr/mån</span></span>
+            <span>{{ privateLeasing.leaseBaseMonthlyCostInSek | number }} kr</span>
+        </div>
+        <div class="flex justify-between">
+            <span>Vinterdäck <span class="text-xs text-gray-400">kr/mån</span></span>
+            <span>{{ privateLeasing.winterTiresMonthlyCostInSek | number }} kr</span>
+        </div>
+        <div class="flex justify-between">
+            <span>Försäkring <span class="text-xs text-gray-400">kr/mån</span></span>
+            <span>{{ privateLeasing.insuranceCostPerMonthInSek | number }} kr</span>
+        </div>
+        <div class="flex justify-between items-center">
+            <span>Service</span>
+            <span *ngIf="privateLeasing.serviceIncluded"
+                class="bg-green-100 text-green-800 px-2 py-0.5 rounded text-xs font-semibold">
+                Ingår
+            </span>
+            <span *ngIf="!privateLeasing.serviceIncluded" class="text-gray-400 italic text-xs">
+                Ingår ej
+            </span>
+        </div>
+    </div>
+
+    <!-- Extra kostnader -->
+    <div class="mb-6 text-gray-600 text-sm">
+        <p class="font-semibold mb-2">Extra kostnader</p>
+        <div class="flex justify-between">
+            <span>Fordonsskatt (per år)</span>
+            <span>{{ privateLeasing.getFullTaxCostPerYearInSek() | number }} kr</span>
+        </div>
+    </div>
+
+    <!-- Källa / länk -->
+    <div class="border-t pt-3 flex justify-end">
+        <a [href]="privateLeasing.sourceUrl" target="_blank" class="text-sm text-blue-600 hover:underline">
+            Visa erbjudande →
+        </a>
+    </div>
+</div>

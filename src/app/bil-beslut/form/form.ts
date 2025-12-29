@@ -1,5 +1,5 @@
 import { NgFor } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -16,6 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class FormComponent implements OnInit {
   form!: FormGroup;
+
+  @Output() submitForm = new EventEmitter<any>();
 
   arrangementOptions = [
     { label: 'Privateasing', controlName: 'leasing' },
@@ -38,12 +40,10 @@ export class FormComponent implements OnInit {
       const selectedArrangements = this.arrangementOptions
         .filter((opt) => this.form.get(opt.controlName)?.value)
         .map((opt) => opt.label);
-
-
       const data = {
         arrangements: selectedArrangements,
       };
-      console.log('Form data:', data);
+      this.submitForm.emit(data);
     }
   }
 }

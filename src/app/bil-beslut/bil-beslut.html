@@ -1,0 +1,8 @@
+<div class="flex flex-col gap-y-4">
+    <app-form (submitForm)="handleFormSubmit($event)"></app-form>
+    <div class="grid grid-cols-4 gap-4 p-4 min-w-max">
+        <ng-container *ngFor="let r of this.results">
+            <app-private-leasing-result [privateLeasing]="r"></app-private-leasing-result>
+        </ng-container>
+    </div>
+</div>
