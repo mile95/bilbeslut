@@ -31,12 +31,12 @@ export class FormComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
   ngOnInit(): void {
     const arrangementControls = this.arrangementOptions.reduce((acc, option) => {
-      acc[option.controlName] = [false];
+      acc[option.controlName] = [true];
       return acc;
     }, {} as { [key: string]: any });
 
     const fuelControls = this.fuelOptions.reduce((acc, option) => {
-      acc[option.controlName] = [false];
+      acc[option.controlName] = [true];
       return acc;
     }, {} as { [key: string]: any });
 
