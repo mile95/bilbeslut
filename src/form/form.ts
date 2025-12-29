@@ -21,13 +21,6 @@ export class FormComponent implements OnInit {
     { label: 'Privateasing', controlName: 'leasing' },
   ];
 
-  fuelOptions = [
-    { label: 'Bensin', controlName: 'bensin' },
-    { label: 'Diesel', controlName: 'diesel' },
-    { label: 'El', controlName: 'el' },
-    { label: 'Hybrid', controlName: 'hybrid' },
-  ];
-
   constructor(private fb: FormBuilder) { }
   ngOnInit(): void {
     const arrangementControls = this.arrangementOptions.reduce((acc, option) => {
@@ -35,14 +28,8 @@ export class FormComponent implements OnInit {
       return acc;
     }, {} as { [key: string]: any });
 
-    const fuelControls = this.fuelOptions.reduce((acc, option) => {
-      acc[option.controlName] = [true];
-      return acc;
-    }, {} as { [key: string]: any });
-
     this.form = this.fb.group({
       ...arrangementControls,
-      ...fuelControls,
     });
   }
 
@@ -52,19 +39,11 @@ export class FormComponent implements OnInit {
         .filter((opt) => this.form.get(opt.controlName)?.value)
         .map((opt) => opt.label);
 
-      const selectedFuels = this.fuelOptions
-        .filter((opt) => this.form.get(opt.controlName)?.value)
-        .map((opt) => opt.label);
 
       const data = {
         arrangements: selectedArrangements,
-        fuels: selectedFuels,
       };
-
       console.log('Form data:', data);
     }
-
   }
-
-
 }
