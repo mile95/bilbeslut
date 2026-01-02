@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FuelType, PrivateLeasing } from './private-leasing/private-leasing.model';
+import { PrivateLeasing } from './private-leasing/private-leasing.model';
 import { PRIVATE_LEASING_OFFERS } from './private-leasing/private-leasing.data';
 import { PrivateLeasingResult } from "./private-leasing/private-leasing-result/private-leasing-result";
 import { NgFor } from '@angular/common';
@@ -32,6 +32,7 @@ export class BilBeslut implements OnInit {
 
   private applyFilter(): void {
     if (this.filter) {
+      console.log('Applying filter:', this.filter);
       this.filteredResults = this.results.filter(r =>
         this.filter!.fuelTypes.includes(r.fuelType) &&
         this.filter!.brands.includes(r.brand));
@@ -46,6 +47,7 @@ export class BilBeslut implements OnInit {
       });
     } else {
       this.filteredResults = this.results;
+      console.log('No filter applied, showing all results.');
     }
   }
 }

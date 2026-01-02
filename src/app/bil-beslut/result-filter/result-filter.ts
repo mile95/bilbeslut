@@ -1,5 +1,5 @@
 import { NgClass, NgFor } from '@angular/common';
-import { Component, Output } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FuelType } from '../private-leasing/private-leasing.model';
 import { EventEmitter } from '@angular/core';
 
@@ -20,7 +20,7 @@ export class Filter {
   templateUrl: './result-filter.html',
   styleUrl: './result-filter.css',
 })
-export class ResultFilter {
+export class ResultFilter implements OnInit {
 
   @Output() filterChange = new EventEmitter<Filter>();
 
@@ -48,6 +48,10 @@ export class ResultFilter {
   constructor() {
     this.initSelectedFuelTypes();
     this.initSelectedBrands();
+  }
+
+  ngOnInit(): void {
+    this.onFilterChange();
   }
 
 
