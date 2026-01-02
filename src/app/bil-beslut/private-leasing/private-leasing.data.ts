@@ -13,7 +13,8 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         true,
         352,
         450,
-        'https://privatleasing.volkswagen.se/'
+        'https://privatleasing.volkswagen.se/',
+        223
     ),
     new PrivateLeasing(
         'Volkswagen',
@@ -27,7 +28,8 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         true,
         534,
         700,
-        'https://privatleasing.volkswagen.se/'
+        'https://privatleasing.volkswagen.se/',
+        876
     ),
     new PrivateLeasing(
         'Volvo',
@@ -41,7 +43,8 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         true,
         335,
         780,
-        'https://www.volvocars.com/se/privatleasing'
+        'https://www.volvocars.com/se/privatleasing',
+        67
     ),
     new PrivateLeasing(
         'Volvo',
@@ -55,7 +58,8 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         true,
         290,
         792,
-        'https://www.volvocars.com/se/privatleasing'
+        'https://www.volvocars.com/se/privatleasing',
+        222
     ),
     new PrivateLeasing(
         'Toyota',
@@ -69,7 +73,8 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         true,
         311,
         464,
-        'https://easyprivatleasing.toyota.se/'
+        'https://easyprivatleasing.toyota.se/',
+        122
     ),
     new PrivateLeasing(
         'Toyota',
@@ -83,7 +88,8 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         true,
         320,
         516,
-        'https://easyprivatleasing.toyota.se/'
+        'https://easyprivatleasing.toyota.se/',
+        897
     ),
     new PrivateLeasing(
         'Tesla',
@@ -97,7 +103,8 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         false,
         500,
         Math.floor(19979 / 36),
-        'https://www.tesla.com/sv_SE/model3'
+        'https://www.tesla.com/sv_SE/model3',
+        333
     ),
     new PrivateLeasing(
         'Tesla',
@@ -111,7 +118,8 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         false,
         1500,
         27000 / 36,
-        'https://www.tesla.com/sv_se/modely/'
+        'https://www.tesla.com/sv_se/modely/',
+        254
     ),
     new PrivateLeasing(
         'Audi',
@@ -125,7 +133,8 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         true,
         394,
         515,
-        'https://privatleasing.audi.se/'
+        'https://privatleasing.audi.se/',
+        1275
     ),
     new PrivateLeasing(
         'Audi',
@@ -139,7 +148,8 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         true,
         526,
         745,
-        'https://privatleasing.audi.se/'
+        'https://privatleasing.audi.se/',
+        127
     ),
     new PrivateLeasing(
         'Skoda',
@@ -153,7 +163,8 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         true,
         293,
         425,
-        'https://privatleasing.skoda.se/'
+        'https://privatleasing.skoda.se/',
+        1275
     ),
     new PrivateLeasing(
         'Skoda',
@@ -167,7 +178,8 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         true,
         334,
         495,
-        'https://privatleasing.skoda.se/'
+        'https://privatleasing.skoda.se/',
+        600
     ),
     new PrivateLeasing(
         'Citroën',
@@ -181,7 +193,8 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         true,
         334,
         495,
-        'https://privatleasing.citroen.se/'
+        'https://privatleasing.citroen.se/',
+        500
     ),
     new PrivateLeasing(
         'Citroën',
@@ -195,6 +208,7 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         true,
         334,
         495,
-        'https://privatleasing.citroen.se/'
+        'https://privatleasing.citroen.se/',
+        200
     )
 ];

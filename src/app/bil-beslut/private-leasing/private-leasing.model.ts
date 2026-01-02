@@ -11,14 +11,18 @@ export class PrivateLeasing {
         readonly serviceIncluded: boolean,
         readonly insuranceCostPerMonthInSek: number,
         readonly winterTiresMonthlyCostInSek: number,
-        readonly sourceUrl: string
+        readonly sourceUrl: string,
+        readonly estimatedFuelOrElectricity: number
     ) { }
 
     public getTotalMonthlyCost(): number {
         return this.leaseBaseMonthlyCostInSek +
             this.insuranceCostPerMonthInSek +
-            this.winterTiresMonthlyCostInSek;
+            this.winterTiresMonthlyCostInSek +
+            this.getTaxCostPerMonth() +
+            this.estimatedFuelOrElectricity;
     }
+
 
     public getTotalCostForFullLeaseInSek(): number {
         return (this.getTotalMonthlyCost() * this.standardDurationInMonths) + this.getFullTaxCostPerYearInSek() * (this.standardDurationInMonths / 12);
@@ -36,7 +40,12 @@ export class PrivateLeasing {
                 return 1560;
         }
     }
+
+    public getTaxCostPerMonth(): number {
+        return this.getFullTaxCostPerYearInSek() / 12;
+    }
 }
+
 
 export class MileageAndCost {
     constructor(
