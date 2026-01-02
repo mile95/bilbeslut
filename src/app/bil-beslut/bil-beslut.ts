@@ -4,10 +4,11 @@ import { PRIVATE_LEASING_OFFERS } from './private-leasing/private-leasing.data';
 import { PrivateLeasingResult } from "./private-leasing/private-leasing-result/private-leasing-result";
 import { NgFor } from '@angular/common';
 import { Filter, ResultFilter } from "./result-filter/result-filter";
+import { Header } from './header/header';
 
 @Component({
   selector: 'app-bil-beslut',
-  imports: [PrivateLeasingResult, NgFor, ResultFilter],
+  imports: [PrivateLeasingResult, NgFor, ResultFilter, Header],
   templateUrl: './bil-beslut.html',
   styleUrl: './bil-beslut.css',
 })
