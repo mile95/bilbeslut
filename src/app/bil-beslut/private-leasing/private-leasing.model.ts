@@ -46,8 +46,8 @@ export class MileageAndCost {
 }
 
 export enum FuelType {
-    Petrol = 'Petrol',
+    Petrol = 'Bensin',
     Diesel = 'Diesel',
-    Electric = 'Electric',
+    Electric = 'El  ',
     Hybrid = 'Hybrid'
 }
