@@ -1,14 +1,12 @@
-<div class="border rounded-lg p-6 shadow-md flex flex-col w-96 hover:bg-slate-100 transition duration-300">
+<div class="border rounded-lg p-4 shadow-sm flex flex-col w-96 hover:bg-slate-100 transition duration-300">
 
-    <div class="relative flex gap-3 pb-4">
-
-        <!-- Brand icon -->
+    <!-- Header -->
+    <div class="relative flex gap-3 pb-3">
         <img [src]="getBrandIcon(privateLeasing.brand)" [alt]="privateLeasing.brand"
-            class="h-7 w-7 object-contain mt-1" />
+            class="h-6 w-6 object-contain mt-0.5" />
 
-        <!-- Brand + model -->
-        <div class="flex-1">
-            <h3 class="text-xl font-bold text-gray-900 leading-tight">
+        <div class="flex-1 leading-tight">
+            <h3 class="text-lg font-bold text-gray-900">
                 {{ privateLeasing.brand }} {{ privateLeasing.model }}
             </h3>
 
@@ -16,40 +14,30 @@
                 {{ privateLeasing.trim }}
             </p>
 
-            <p class="text-sm font-medium text-gray-600 mt-1">
+            <p class="text-xs font-medium text-gray-500 mt-0.5">
                 {{ privateLeasing.standardDurationInMonths }} månader
             </p>
         </div>
 
-        <!-- Fuel type badge -->
-        <span class="absolute top-0 right-0 text-xs font-semibold px-3 py-1 rounded-full"
+        <span class="absolute top-0 right-0 text-xs font-semibold px-2 py-0.5 rounded-full"
             [ngClass]="getfuelBadgeClass()">
             {{ privateLeasing.fuelType }}
         </span>
-
     </div>
 
-
-
-    <!-- Månadskostnad -->
-    <div class="mb-6">
-        <p class="text-xs uppercase font-semibold text-gray-500 tracking-wide mb-1">Sann månadskostnad</p>
-        <p class="text-4xl font-extrabold text-blue-700">
+    <!-- Sann månadskostnad -->
+    <div class="mb-4">
+        <p class="text-xs uppercase font-semibold text-gray-500 tracking-wide mb-0.5">
+            Sann månadskostnad
+        </p>
+        <p class="text-3xl font-extrabold text-blue-700 leading-none">
             {{ privateLeasing.getTotalMonthlyCost() | number }} kr
-            <span class="text-base font-normal">/ mån</span>
+            <span class="text-sm font-normal">/ mån</span>
         </p>
     </div>
 
-    <!-- Total kostnad -->
-    <div class="mb-6">
-        <p class="text-xs uppercase font-semibold text-gray-500 tracking-wide mb-1">Total kostnad</p>
-        <p class="text-xl font-semibold text-gray-800">
-            {{ privateLeasing.getTotalCostForFullLeaseInSek() | number }} kr
-        </p>
-    </div>
-
-    <!-- Detaljerade kostnader -->
-    <div class="text-gray-700 text-sm space-y-2 mb-6">
+    <!-- Kostnadsdetaljer -->
+    <div class="text-gray-700 text-sm space-y-1 mb-4">
         <div class="flex justify-between">
             <span>Baspris</span>
             <span>{{ privateLeasing.leaseBaseMonthlyCostInSek | number }} kr</span>
@@ -70,22 +58,34 @@
             <span>Fordonsskatt</span>
             <span>{{ privateLeasing.getTaxCostPerMonth() | number }} kr</span>
         </div>
-        <div class="flex justify-between items-center">
-            <span>Service</span>
-            <span *ngIf="privateLeasing.serviceIncluded"
-                class="bg-green-100 text-green-800 px-2 py-0.5 rounded text-xs font-semibold">
-                Ingår
-            </span>
-            <span *ngIf="!privateLeasing.serviceIncluded" class="text-red-400 italic text-xs">
-                Ingår ej
-            </span>
-        </div>
     </div>
 
-    <!-- Källa / länk -->
-    <div class="border-t pt-3 flex justify-end">
-        <a [href]="privateLeasing.sourceUrl" target="_blank" class="text-sm text-blue-600 hover:underline">
-            Visa erbjudande →
+    <!-- Service -->
+    <div class="flex justify-between items-center text-sm mb-4">
+        <span>Service</span>
+        <span *ngIf="privateLeasing.serviceIncluded"
+            class="bg-green-100 text-green-800 px-2 py-0.5 rounded text-xs font-semibold">
+            Ingår
+        </span>
+        <span *ngIf="!privateLeasing.serviceIncluded" class="text-red-400 italic text-xs">
+            Ingår ej
+        </span>
+    </div>
+
+    <!-- Total kostnad + länk -->
+    <div class="border-t pt-3 flex items-center justify-between">
+        <div>
+            <p class="text-xs uppercase font-semibold text-gray-500 tracking-wide">
+                Total kostnad
+            </p>
+            <p class="text-lg font-semibold text-gray-800">
+                {{ privateLeasing.getTotalCostForFullLeaseInSek() | number }} kr
+            </p>
+        </div>
+
+        <a [href]="privateLeasing.sourceUrl" target="_blank"
+            class="text-sm text-blue-600 hover:underline whitespace-nowrap">
+            Visa →
         </a>
     </div>
 </div>
