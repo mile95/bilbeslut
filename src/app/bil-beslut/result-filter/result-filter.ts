@@ -87,6 +87,20 @@ export class ResultFilter implements OnInit {
     this.onFilterChange();
   }
 
+  currentSort!: string;
+  sortDirection: 'asc' | 'desc' = 'asc';
+
+  setSort(sort: string) {
+    this.currentSort = sort;
+    this.onSortChange({ target: { value: sort } });
+  }
+
+  setSortDirection(direction: 'asc' | 'desc') {
+    this.sortDirection = direction;
+    this.onSortDirectionChange({ target: { value: direction } });
+  }
+
+
   onSortChange(event: any): void {
     const value = event.target.value as 'monthlyCost' | 'totalCost';
     this.selectedSortValue = value;
