@@ -58,18 +58,11 @@
             <span>Fordonsskatt</span>
             <span>{{ privateLeasing.getTaxCostPerMonth() | number }} kr</span>
         </div>
-    </div>
+        <div class="flex justify-between">
+            <span>Service</span>
+            <span>{{ privateLeasing.serviceCostPerMonthInSek | number }} kr</span>
 
-    <!-- Service -->
-    <div class="flex justify-between items-center text-sm mb-4">
-        <span>Service</span>
-        <span *ngIf="privateLeasing.serviceIncluded"
-            class="bg-green-100 text-green-800 px-2 py-0.5 rounded text-xs font-semibold">
-            Ingår
-        </span>
-        <span *ngIf="!privateLeasing.serviceIncluded" class="text-red-400 italic text-xs">
-            Ingår ej
-        </span>
+        </div>
     </div>
 
     <!-- Total kostnad + länk -->

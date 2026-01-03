@@ -8,7 +8,7 @@ export class PrivateLeasing {
         readonly standardDurationInMonths: number,
         readonly standardMileagePerYearInKm: number,
         readonly otherMileAge: MileageAndCost[],
-        readonly serviceIncluded: boolean,
+        readonly serviceCostPerMonthInSek: number,
         readonly insuranceCostPerMonthInSek: number,
         readonly winterTiresMonthlyCostInSek: number,
         readonly sourceUrl: string,
@@ -20,6 +20,7 @@ export class PrivateLeasing {
             this.insuranceCostPerMonthInSek +
             this.winterTiresMonthlyCostInSek +
             this.getTaxCostPerMonth() +
+            this.serviceCostPerMonthInSek +
             this.estimatedFuelOrElectricity;
     }
 
