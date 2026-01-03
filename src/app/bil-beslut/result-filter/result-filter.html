@@ -1,49 +1,55 @@
 <div class="sticky top-0 z-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap items-stretch gap-6 text-sm text-gray-700">
+    <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap items-stretch gap-6 text-sm text-gray-700 h-full ">
 
-        <div class="flex flex-col min-w-[140px] border-r border-gray-200 pr-4 h-full">
-            <span class="font-semibold text-gray-900 mb-1 min-w-[120px]">Finansiering</span>
-            <div class="flex flex-wrap gap-2 flex-grow">
-                <span *ngFor="let alt of alternatives" [ngClass]="alt.enabled
-        ? 'bg-gray-600 text-white border-gray-600 cursor-default select-none'
-        : 'bg-slate-100 text-gray-400 border-slate-200 cursor-not-allowed select-none'"
-                    class="px-3 py-1 rounded-full border"
-                    [title]="alt.enabled ? '' : 'Endast privatleasing är tillgängligt just nu'">
-                    {{ alt.name }}
+        <div class="flex min-w-[140px] border-r border-gray-200 pr-4">
+            <div class="flex flex-col gap-2">
+                <span class="font-semibold text-gray-900 whitespace-nowrap">
+                    Finansiering
+                </span>
+
+                <span class="px-3 py-1 rounded-full border bg-slate-100 text-gray-400
+             cursor-not-allowed select-none" title="Endast privatleasing är tillgängligt just nu">
+                    Privatleasing
                 </span>
             </div>
         </div>
 
-        <!-- Drivmedel -->
-        <div class="flex flex-col min-w-35 border-r border-gray-500 pr-4 h-full">
-            <span class="font-semibold text-gray-900 mb-1 min-w-30">Drivmedel</span>
-            <div class="flex flex-wrap gap-2 grow">
-                <button *ngFor="let ft of fuelTypes" type="button" (click)="toggleFuelType(ft)"
-                    class="px-3 py-1 rounded-full border transition focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    [ngClass]="selectedFuelTypes.has(ft)
-            ? 'bg-blue-600 text-white border-blue-600'
-            : 'bg-white text-gray-700 hover:bg-slate-100'">
-                    {{ ft }}
-                </button>
+        <div class="flex min-w-[140px] border-r border-gray-500 pr-4">
+            <div class="flex flex-col gap-2">
+                <span class="font-semibold text-gray-900 whitespace-nowrap">
+                    Drivmedel
+                </span>
+
+                <div class="flex flex-wrap gap-2">
+                    <button *ngFor="let ft of fuelTypes" type="button" (click)="toggleFuelType(ft)" class="flex items-center gap-2 px-3 py-1 rounded-full border transition
+               focus:outline-none focus:ring-2 focus:ring-blue-500" [ngClass]="selectedFuelTypes.has(ft)
+          ? 'border-blue-600 bg-blue-50 text-blue-800'
+          : 'border-gray-300 bg-white text-gray-700 hover:bg-slate-100'">
+                        {{ ft }}
+                    </button>
+                </div>
             </div>
         </div>
 
+
         <!-- Bilmodell -->
-        <div class="flex flex-col min-w-[140px] max-w-[320px] border-r border-gray-500 pr-4 h-full">
+        <div class="flex flex-col min-w-[140px] max-w-[320px] border-r border-gray-500 pr-4 ">
             <span class="font-semibold text-gray-900 mb-1 min-w-[120px]">Bilmodell</span>
-            <div class="flex flex-wrap gap-2 max-w-[300px] flex-grow">
-                <button *ngFor="let brand of brands" type="button" (click)="toggleBrand(brand)"
-                    class="px-3 py-1 rounded-full border transition focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    [ngClass]="selectedBrands.has(brand)
-            ? 'bg-blue-600 text-white border-blue-600'
-            : 'bg-white text-gray-700 hover:bg-slate-100'">
-                    {{ brand }}
+            <div class="flex flex-wrap gap-2">
+                <button *ngFor="let brand of brands" type="button" (click)="toggleBrand(brand)" class="flex items-center gap-2 px-3 py-1 rounded-full border transition
+         focus:outline-none focus:ring-2 focus:ring-blue-500" [ngClass]="selectedBrands.has(brand)
+    ? 'border-blue-600 bg-blue-50 text-blue-800'
+    : 'border-gray-300 bg-white text-gray-700 hover:bg-slate-100'">
+                    <img [src]="getBrandIcon(brand)" [alt]="brand" class="h-4 w-4 object-contain" />
+                    <span>{{ brand }}</span>
                 </button>
+
             </div>
+
         </div>
 
         <!-- Sorteringsval -->
-        <div class="flex flex-col ml-auto min-w-[160px] gap-1 h-full">
+        <div class="flex flex-col ml-auto min-w-[160px] gap-1 ">
             <span class="font-semibold text-gray-900 mb-1 min-w-[120px]">Sorteringsval</span>
             <select (change)="onSortChange($event)"
                 class="rounded-full border px-4 py-1.5 text-sm bg-slate-50 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2">

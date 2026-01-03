@@ -108,7 +108,6 @@ export class ResultFilter implements OnInit {
     const brand = select.value;
 
     if (!brand) {
-      // "Alla märken" → reset
       this.initSelectedBrands();
     } else {
       this.toggleBrand(brand);
@@ -125,4 +124,19 @@ export class ResultFilter implements OnInit {
       )
     );
   }
+
+  getBrandIcon(brand: string): string {
+    const map: Record<string, string> = {
+      Volkswagen: 'brands/volkswagen.svg',
+      Volvo: 'brands/volvo.svg',
+      Audi: 'brands/audi.svg',
+      Skoda: 'brands/skoda.svg',
+      Tesla: 'brands/tesla.svg',
+      Toyota: 'brands/toyota.svg',
+      Citroën: 'brands/citroen.svg',
+    };
+
+    return map[brand] ?? 'brands/default-car.svg';
+  }
+
 }
