@@ -21,7 +21,7 @@
 
             <div class="flex flex-wrap gap-1.5">
                 <button *ngFor="let ft of fuelTypes" type="button" (click)="toggleFuelType(ft)" class="px-2.5 py-0.5 rounded-full border text-xs transition
-                           focus:outline-none focus:ring-2 focus:ring-blue-500" [ngClass]="selectedFuelTypes.has(ft)
+                           focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer" [ngClass]="selectedFuelTypes.has(ft)
                         ? 'border-blue-600 bg-blue-50 text-blue-800'
                         : 'border-gray-300 bg-white text-gray-700 hover:bg-slate-100'">
                     {{ ft }}
@@ -37,7 +37,7 @@
 
             <div class="flex flex-wrap gap-1.5">
                 <button *ngFor="let brand of brands" type="button" (click)="toggleBrand(brand)" class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border text-xs transition
-                           focus:outline-none focus:ring-2 focus:ring-blue-500" [ngClass]="selectedBrands.has(brand)
+                           focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer" [ngClass]="selectedBrands.has(brand)
                         ? 'border-blue-600 bg-blue-50 text-blue-800'
                         : 'border-gray-300 bg-white text-gray-700 hover:bg-slate-100'">
                     <img [src]="getBrandIcon(brand)" [alt]="brand" class="h-3.5 w-3.5 object-contain" />
@@ -55,7 +55,7 @@
             <!-- Sorteringsfält -->
             <div class="flex gap-1.5">
                 <button *ngFor="let option of sortOptions" type="button" (click)="setSort(option.value)" class="px-2.5 py-0.5 rounded-full border text-xs transition
-                   focus:outline-none focus:ring-2 focus:ring-blue-500" [ngClass]="currentSort === option.value
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer" [ngClass]="currentSort === option.value
                 ? 'border-blue-600 bg-blue-50 text-blue-800'
                 : 'border-gray-300 bg-white text-gray-700 hover:bg-slate-100'">
                     {{ option.label }}
@@ -65,14 +65,14 @@
             <!-- Sorteringsriktning -->
             <div class="flex gap-1.5">
                 <button type="button" (click)="setSortDirection('asc')"
-                    class="px-2 py-0.5 rounded-full border text-xs transition" [ngClass]="sortDirection === 'asc'
+                    class="px-2 py-0.5 rounded-full border text-xs transition cursor-pointer" [ngClass]="sortDirection === 'asc'
                 ? 'border-blue-600 bg-blue-50 text-blue-800'
                 : 'border-gray-300 bg-white text-gray-700 hover:bg-slate-100'" title="Stigande">
                     ↑
                 </button>
 
                 <button type="button" (click)="setSortDirection('desc')"
-                    class="px-2 py-0.5 rounded-full border text-xs transition" [ngClass]="sortDirection === 'desc'
+                    class="px-2 py-0.5 rounded-full border text-xs transition cursor-pointer" [ngClass]="sortDirection === 'desc'
                 ? 'border-blue-600 bg-blue-50 text-blue-800'
                 : 'border-gray-300 bg-white text-gray-700 hover:bg-slate-100'" title="Fallande">
                     ↓
