@@ -25,7 +25,7 @@ export class PrivateLeasing {
 
 
     public getTotalCostForFullLeaseInSek(): number {
-        return (this.getTotalMonthlyCost() * this.standardDurationInMonths) + this.getFullTaxCostPerYearInSek() * (this.standardDurationInMonths / 12);
+        return (this.getTotalMonthlyCost() * this.standardDurationInMonths);
     }
 
     public getFullTaxCostPerYearInSek(): number {
@@ -57,6 +57,6 @@ export class MileageAndCost {
 export enum FuelType {
     Petrol = 'Bensin',
     Diesel = 'Diesel',
-    Electric = 'El  ',
+    Electric = 'El',
     Hybrid = 'Hybrid'
 }
