@@ -1,3 +1,5 @@
+import { PrivateLeasingDTO } from "../leasing-fetcher";
+
 export class PrivateLeasing {
     constructor(
         readonly brand: string,
@@ -7,13 +9,31 @@ export class PrivateLeasing {
         readonly fuelType: FuelType,
         readonly standardDurationInMonths: number,
         readonly standardMileagePerYearInKm: number,
-        readonly otherMileAge: MileageAndCost[],
         readonly serviceCostPerMonthInSek: number,
         readonly insuranceCostPerMonthInSek: number,
         readonly winterTiresMonthlyCostInSek: number,
         readonly sourceUrl: string,
-        readonly estimatedFuelOrElectricity: number
+        readonly imageUrl: string | null,
+        readonly estimatedFuelOrElectricity: number,
     ) { }
+
+    public static fromDTO(dto: PrivateLeasingDTO): PrivateLeasing {
+        return new PrivateLeasing(
+            dto.brand,
+            dto.model,
+            dto.trim,
+            dto.base_cost,
+            FuelType[dto.fuel_type as keyof typeof FuelType],
+            dto.standard_period,
+            dto.standard_milage,
+            Math.floor(Math.random() * 400) + 200,
+            Math.floor(Math.random() * 500) + 300,
+            dto.winter_tires_cost,
+            dto.source_url,
+            dto.image_url,
+            Math.floor(Math.random() * 800) + 200
+        )
+    };
 
     public getTotalMonthlyCost(): number {
         return this.leaseBaseMonthlyCostInSek +
@@ -47,13 +67,6 @@ export class PrivateLeasing {
     }
 }
 
-
-export class MileageAndCost {
-    constructor(
-        public readonly mileagePerYearInKm: number,
-        public readonly monthlyCostInSek: number
-    ) { }
-}
 
 export enum FuelType {
     Petrol = 'Bensin',

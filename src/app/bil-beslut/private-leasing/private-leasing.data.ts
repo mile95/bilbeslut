@@ -1,4 +1,4 @@
-import { PrivateLeasing, MileageAndCost, FuelType } from "./private-leasing.model";
+import { PrivateLeasing, FuelType } from "./private-leasing.model";
 
 export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
     new PrivateLeasing(
@@ -9,11 +9,11 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         FuelType.Petrol,
         36,
         1000,
-        [new MileageAndCost(1500, 215), new MileageAndCost(2000, 595)],
         0,
         352,
         450,
         'https://privatleasing.volkswagen.se/',
+        null,
         223
     ),
     new PrivateLeasing(
@@ -24,11 +24,11 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         FuelType.Electric,
         36,
         1000,
-        [new MileageAndCost(1500, 350), new MileageAndCost(2000, 690)],
         0,
         534,
         700,
         'https://privatleasing.volkswagen.se/',
+        null,
         876
     ),
     new PrivateLeasing(
@@ -39,11 +39,11 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         FuelType.Electric,
         36,
         1000,
-        [new MileageAndCost(1500, 190), new MileageAndCost(2000, 471)],
         0,
         335,
         780,
         'https://www.volvocars.com/se/privatleasing',
+        null,
         67
     ),
     new PrivateLeasing(
@@ -54,11 +54,11 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         FuelType.Electric,
         36,
         1000,
-        [new MileageAndCost(1500, 241), new MileageAndCost(2000, 573)],
         0,
         290,
         792,
         'https://www.volvocars.com/se/privatleasing',
+        null,
         222
     ),
     new PrivateLeasing(
@@ -69,11 +69,11 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         FuelType.Hybrid,
         36,
         1500,
-        [new MileageAndCost(2000, 319), new MileageAndCost(2500, 558)],
         0,
         311,
         464,
         'https://easyprivatleasing.toyota.se/',
+        null,
         122
     ),
     new PrivateLeasing(
@@ -84,11 +84,11 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         FuelType.Hybrid,
         36,
         1500,
-        [new MileageAndCost(2000, 315), new MileageAndCost(2500, 560)],
         0,
         320,
         516,
         'https://easyprivatleasing.toyota.se/',
+        null,
         897
     ),
     new PrivateLeasing(
@@ -99,11 +99,11 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         FuelType.Electric,
         36,
         1000,
-        [new MileageAndCost(1500, 232), new MileageAndCost(2000, 521)],
         200,
         500,
         Math.floor(19979 / 36),
         'https://www.tesla.com/sv_SE/model3',
+        null,
         333
     ),
     new PrivateLeasing(
@@ -114,11 +114,11 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         FuelType.Electric,
         36,
         1000,
-        [new MileageAndCost(1500, 257), new MileageAndCost(2000, 578)],
         200,
         1500,
         27000 / 36,
         'https://www.tesla.com/sv_se/modely/',
+        null,
         254
     ),
     new PrivateLeasing(
@@ -129,11 +129,11 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         FuelType.Petrol,
         36,
         1000,
-        [new MileageAndCost(1500, 270), new MileageAndCost(2000, 570)],
         0,
         394,
         515,
         'https://privatleasing.audi.se/',
+        null,
         1275
     ),
     new PrivateLeasing(
@@ -144,11 +144,11 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         FuelType.Electric,
         36,
         1000,
-        [new MileageAndCost(1500, 370), new MileageAndCost(2000, 720)],
         0,
         526,
         745,
         'https://privatleasing.audi.se/',
+        null,
         127
     ),
     new PrivateLeasing(
@@ -159,11 +159,11 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         FuelType.Petrol,
         36,
         1000,
-        [new MileageAndCost(1500, 240), new MileageAndCost(2000, 630)],
         0,
         293,
         425,
         'https://privatleasing.skoda.se/',
+        null,
         1275
     ),
     new PrivateLeasing(
@@ -174,11 +174,11 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         FuelType.Petrol,
         36,
         1000,
-        [new MileageAndCost(1500, 240), new MileageAndCost(2000, 645)],
         0,
         334,
         495,
         'https://privatleasing.skoda.se/',
+        null,
         600
     ),
     new PrivateLeasing(
@@ -189,11 +189,11 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         FuelType.Petrol,
         36,
         1000,
-        [new MileageAndCost(1500, 240), new MileageAndCost(2000, 645)],
         0,
         334,
         495,
         'https://privatleasing.citroen.se/',
+        null,
         500
     ),
     new PrivateLeasing(
@@ -204,11 +204,11 @@ export const PRIVATE_LEASING_OFFERS: PrivateLeasing[] = [
         FuelType.Petrol,
         36,
         1000,
-        [new MileageAndCost(1500, 240), new MileageAndCost(2000, 645)],
         0,
         334,
         495,
         'https://privatleasing.citroen.se/',
+        null,
         200
     )
 ];

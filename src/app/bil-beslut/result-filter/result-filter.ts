@@ -42,8 +42,8 @@ export class ResultFilter implements OnInit {
 
   readonly selectedFuelTypes: Set<FuelType> = new Set<FuelType>();
   readonly selectedBrands: Set<string> = new Set<string>();
-  selectedSortValue: 'monthlyCost' | 'totalCost' = 'monthlyCost';
-  selectedSortDirection: 'asc' | 'desc' = 'asc';
+  currentSort: string = 'monthlyCost';
+  sortDirection: 'asc' | 'desc' = 'asc';
 
   constructor() {
     this.initSelectedFuelTypes();
@@ -87,8 +87,7 @@ export class ResultFilter implements OnInit {
     this.onFilterChange();
   }
 
-  currentSort!: string;
-  sortDirection: 'asc' | 'desc' = 'asc';
+
 
   setSort(sort: string) {
     this.currentSort = sort;
@@ -103,13 +102,13 @@ export class ResultFilter implements OnInit {
 
   onSortChange(event: any): void {
     const value = event.target.value as 'monthlyCost' | 'totalCost';
-    this.selectedSortValue = value;
+    this.currentSort = value;
     this.onFilterChange();
   }
 
   onSortDirectionChange(event: any): void {
     const value = event.target.value as 'asc' | 'desc';
-    this.selectedSortDirection = value;
+    this.sortDirection = value;
     this.onFilterChange();
   }
 
@@ -133,8 +132,8 @@ export class ResultFilter implements OnInit {
       new Filter(
         Array.from(this.selectedFuelTypes),
         Array.from(this.selectedBrands),
-        this.selectedSortValue,
-        this.selectedSortDirection
+        this.currentSort as 'monthlyCost' | 'totalCost',
+        this.sortDirection
       )
     );
   }

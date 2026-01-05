@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { PrivateLeasing } from './private-leasing/private-leasing.model';
-import { PRIVATE_LEASING_OFFERS } from './private-leasing/private-leasing.data';
 import { PrivateLeasingResult } from "./private-leasing/private-leasing-result/private-leasing-result";
 import { NgFor } from '@angular/common';
 import { Filter, ResultFilter } from "./result-filter/result-filter";
 import { Header } from './header/header';
+import { LeasingFetcher } from './leasing-fetcher';
 
 @Component({
   selector: 'app-bil-beslut',
@@ -18,24 +18,37 @@ export class BilBeslut implements OnInit {
   filteredResults: PrivateLeasing[] = [];
   filter: Filter | null = null;
 
+  loadFromBackend = true;
+
+  constructor(private leasingFetcher: LeasingFetcher) { }
+
   ngOnInit(): void {
-    this.results = PRIVATE_LEASING_OFFERS;
-    this.applyFilter();
+    this.loadLeasing();
   }
 
-  constructor() { }
+  private loadLeasing(): void {
+    this.leasingFetcher.getLeasings().subscribe({
+      next: data => {
+        this.results = data.map(dto => PrivateLeasing.fromDTO(dto));
+        this.applyFilter();
+      },
+      error: err => {
+        console.error('Failed to load leasing offers', err);
+      },
+    });
+  }
 
   handleFilterChange(filter: Filter): void {
     this.filter = filter;
-    this.applyFilter();
+    if (this.results.length > 0) this.applyFilter();
   }
 
   private applyFilter(): void {
     if (this.filter) {
-      console.log('Applying filter:', this.filter);
       this.filteredResults = this.results.filter(r =>
         this.filter!.fuelTypes.includes(r.fuelType) &&
         this.filter!.brands.includes(r.brand));
+
       this.filteredResults.sort((a, b) => {
         const valueA = this.filter!.sortValue === 'monthlyCost' ? a.getTotalMonthlyCost() : a.getTotalCostForFullLeaseInSek();
         const valueB = this.filter!.sortValue === 'monthlyCost' ? b.getTotalMonthlyCost() : b.getTotalCostForFullLeaseInSek();
@@ -50,4 +63,5 @@ export class BilBeslut implements OnInit {
       console.log('No filter applied, showing all results.');
     }
   }
+
 }

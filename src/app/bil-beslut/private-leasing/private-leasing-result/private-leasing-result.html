@@ -1,16 +1,25 @@
-<div class="border rounded-lg p-4 shadow-sm flex flex-col w-96 hover:bg-slate-100 transition duration-300">
-
+<div class="border rounded-lg p-4 shadow-sm flex flex-col w-96 h-[480px]">
     <!-- Header -->
-    <div class="relative flex gap-3 pb-3">
-        <img [src]="getBrandIcon(privateLeasing.brand)" [alt]="privateLeasing.brand"
-            class="h-6 w-6 object-contain mt-0.5" />
+    <div class="flex gap-3 pb-3">
+        <!-- Brand + fuel -->
+        <div class="flex flex-col items-center shrink-0">
+            <img [src]="getBrandIcon(privateLeasing.brand)" [alt]="privateLeasing.brand"
+                class="h-6 w-6 object-contain" />
 
+            <span class="mt-1 text-[10px] font-semibold px-2 py-0.5 rounded-full text-center"
+                [ngClass]="getfuelBadgeClass()">
+                {{ privateLeasing.fuelType }}
+            </span>
+        </div>
+
+        <!-- Title -->
         <div class="flex-1 leading-tight">
-            <h3 class="text-lg font-bold text-gray-900">
+            <h3 class="text-lg font-bold text-gray-900 leading-snug line-clamp-2"
+                [title]="privateLeasing.brand + ' ' + privateLeasing.model">
                 {{ privateLeasing.brand }} {{ privateLeasing.model }}
             </h3>
 
-            <p class="text-sm text-gray-600" *ngIf="privateLeasing.trim">
+            <p class="text-sm text-gray-600 truncate" *ngIf="privateLeasing.trim" [title]="privateLeasing.trim">
                 {{ privateLeasing.trim }}
             </p>
 
@@ -18,14 +27,20 @@
                 {{ privateLeasing.standardDurationInMonths }} månader
             </p>
         </div>
-
-        <span class="absolute top-0 right-0 text-xs font-semibold px-2 py-0.5 rounded-full"
-            [ngClass]="getfuelBadgeClass()">
-            {{ privateLeasing.fuelType }}
-        </span>
     </div>
 
-    <!-- Sann månadskostnad -->
+    <!-- Car image -->
+    <div class="h-32 mb-4 bg-white rounded flex items-center justify-center overflow-hidden">
+        <img *ngIf="privateLeasing.imageUrl; else noImage" [src]="privateLeasing.imageUrl"
+            [alt]="privateLeasing.brand + ' ' + privateLeasing.model"
+            class="max-h-full max-w-full object-contain transition-transform duration-300 ease-in-out hover:scale-150"
+            loading="lazy" />
+
+        <ng-template #noImage>
+            <span class="text-xs text-gray-400">Ingen bild</span>
+        </ng-template>
+    </div>
+    <!-- Monthly cost -->
     <div class="mb-4">
         <p class="text-xs uppercase font-semibold text-gray-500 tracking-wide mb-0.5">
             Sann månadskostnad
@@ -36,8 +51,8 @@
         </p>
     </div>
 
-    <!-- Kostnadsdetaljer -->
-    <div class="text-gray-700 text-sm space-y-1 mb-4">
+    <!-- Cost details -->
+    <div class="text-gray-700 text-sm space-y-1 mb-4 flex-1">
         <div class="flex justify-between">
             <span>Baspris</span>
             <span>{{ privateLeasing.leaseBaseMonthlyCostInSek | number }} kr</span>
@@ -61,12 +76,11 @@
         <div class="flex justify-between">
             <span>Service</span>
             <span>{{ privateLeasing.serviceCostPerMonthInSek | number }} kr</span>
-
         </div>
     </div>
 
-    <!-- Total kostnad + länk -->
-    <div class="border-t pt-3 flex items-center justify-between">
+    <!-- Footer -->
+    <div class="border-t pt-3 flex items-center justify-between mt-auto">
         <div>
             <p class="text-xs uppercase font-semibold text-gray-500 tracking-wide">
                 Total kostnad
