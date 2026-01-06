@@ -1,5 +1,5 @@
 import { NgClass, NgFor } from '@angular/common';
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, input, effect } from '@angular/core';
 import { FuelType } from '../private-leasing/private-leasing.model';
 import { EventEmitter } from '@angular/core';
 
@@ -20,10 +20,12 @@ export class Filter {
   templateUrl: './result-filter.html',
   styleUrl: './result-filter.css',
 })
-export class ResultFilter implements OnInit {
+export class ResultFilter {
 
   @Output() filterChange = new EventEmitter<Filter>();
-  @Input() brands: string[] = []
+  brands = input.required<string[]>();
+
+
 
   readonly alternatives: { name: string, enabled: boolean }[] = [
     { name: 'Privatleasing', enabled: true },
@@ -47,11 +49,16 @@ export class ResultFilter implements OnInit {
 
   constructor() {
     this.initSelectedFuelTypes();
-    this.initSelectedBrands();
-  }
+    effect(() => {
+      const brands = this.brands();
 
-  ngOnInit(): void {
-    this.onFilterChange();
+      for (const brand of brands) {
+        if (!this.selectedBrands.has(brand)) {
+          this.selectedBrands.add(brand);
+        }
+      }
+    });
+
   }
 
 
@@ -62,12 +69,13 @@ export class ResultFilter implements OnInit {
     }
   }
 
-  private initSelectedBrands(): void {
+  private initSelectedBrands(brands: string[]): void {
     this.selectedBrands.clear();
-    for (const brand of this.brands) {
+    for (const brand of brands) {
       this.selectedBrands.add(brand);
     }
   }
+
 
   toggleFuelType(fuelType: FuelType): void {
     if (this.selectedFuelTypes.has(fuelType)) {
@@ -114,18 +122,23 @@ export class ResultFilter implements OnInit {
 
   onBrandChange(event: Event): void {
     const select = event.target as HTMLSelectElement | null;
-    if (!select) {
-      return;
-    }
+    if (!select) return;
 
     const brand = select.value;
 
     if (!brand) {
-      this.initSelectedBrands();
+      // Reset to ALL brands from input
+      this.selectedBrands.clear();
+      for (const b of this.brands()) {
+        this.selectedBrands.add(b);
+      }
     } else {
       this.toggleBrand(brand);
     }
+
+    this.onFilterChange();
   }
+
 
   onFilterChange(): void {
     this.filterChange.emit(

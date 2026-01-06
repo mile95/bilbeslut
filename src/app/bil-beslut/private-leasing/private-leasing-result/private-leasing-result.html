@@ -1,4 +1,4 @@
-<div class="border rounded-lg p-4 shadow-sm flex flex-col w-96 h-[480px]">
+<div class="border border-slate-300 rounded-lg p-4 shadow-lg shadow-slate-300 flex flex-col w-96 h-[480px]">
     <!-- Header -->
     <div class="flex gap-3 pb-3">
         <!-- Brand + fuel -->
@@ -24,7 +24,7 @@
             </p>
 
             <p class="text-xs font-medium text-gray-500 mt-0.5">
-                {{ privateLeasing.standardDurationInMonths }} månader
+                {{ privateLeasing.standardPeriod }} månader
             </p>
         </div>
     </div>
@@ -55,15 +55,15 @@
     <div class="text-gray-700 text-sm space-y-1 mb-4 flex-1">
         <div class="flex justify-between">
             <span>Baspris</span>
-            <span>{{ privateLeasing.leaseBaseMonthlyCostInSek | number }} kr</span>
+            <span>{{ privateLeasing.baseCost | number }} kr</span>
         </div>
         <div class="flex justify-between">
             <span>Försäkring</span>
-            <span>{{ privateLeasing.insuranceCostPerMonthInSek | number }} kr</span>
+            <span>{{ privateLeasing.insuranceCost | number }} kr</span>
         </div>
         <div class="flex justify-between">
             <span>Vinterdäck</span>
-            <span>{{ privateLeasing.winterTiresMonthlyCostInSek | number }} kr</span>
+            <span>{{ privateLeasing.winterTiresCost | number }} kr</span>
         </div>
         <div class="flex justify-between">
             <span>Bränsle / El</span>
@@ -75,7 +75,7 @@
         </div>
         <div class="flex justify-between">
             <span>Service</span>
-            <span>{{ privateLeasing.serviceCostPerMonthInSek | number }} kr</span>
+            <span>{{ privateLeasing.serviceCost| number }} kr</span>
         </div>
     </div>
 

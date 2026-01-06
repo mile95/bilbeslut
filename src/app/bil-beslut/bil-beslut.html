@@ -1,11 +1,26 @@
-<div class="flex flex-col gap-y-4 h-screen">
+<div class="relative flex flex-col gap-y-4 h-screen">
+
     <app-header></app-header>
-    <app-result-filter [brands]="this.getAllUniqueBrands()" (filterChange)="handleFilterChange($event)">
+
+    <!-- Loading overlay -->
+    @if (loading()) {
+    <div class="absolute inset-0 z-10 flex items-center justify-center bg-white/70 backdrop-blur-sm">
+        <div class="flex items-center gap-3 text-gray-600">
+            <svg class="animate-spin h-5 w-5 text-blue-600" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none" />
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+            </svg>
+            <span class="font-medium">Hämtar alternativ…</span>
+        </div>
+    </div>
+    }
+
+    <!-- Alltid renderad -->
+    <app-result-filter [brands]="allUniqueBrands()" (filterChange)="handleFilterChange($event)">
     </app-result-filter>
 
-    <div class="grid grid-cols-4 gap-4 p-4 min-w-max grow overflow-y-auto" style="max-height: calc(100vh - 300px);">
-        <ng-container *ngFor="let r of this.filteredResults">
-            <app-private-leasing-result [privateLeasing]="r"></app-private-leasing-result>
-        </ng-container>
+    <div class="grid grid-cols-4 gap-4 p-4 overflow-y-auto flex-1">
+        <app-private-leasing-result *ngFor="let r of filteredResults()" [privateLeasing]="r">
+        </app-private-leasing-result>
     </div>
 </div>

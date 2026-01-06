@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { PrivateLeasing } from './private-leasing/private-leasing.model';
 import { PrivateLeasingResult } from "./private-leasing/private-leasing-result/private-leasing-result";
 import { NgFor } from '@angular/common';
@@ -12,59 +12,68 @@ import { LeasingFetcher } from './leasing-fetcher';
   templateUrl: './bil-beslut.html',
   styleUrl: './bil-beslut.css',
 })
-export class BilBeslut implements OnInit {
+export class BilBeslut {
 
-  results: PrivateLeasing[] = [];
-  filteredResults: PrivateLeasing[] = [];
-  filter: Filter | null = null;
+  results = signal<PrivateLeasing[]>([]);
+  filteredResults = signal<PrivateLeasing[]>([]);
+  loading = signal(false);
+  filter = signal<Filter | null>(null);
 
   constructor(private leasingFetcher: LeasingFetcher) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.loadLeasing();
   }
 
-  private loadLeasing(): void {
+  private loadLeasing() {
+    this.loading.set(true);
+
     this.leasingFetcher.getLeasings().subscribe({
       next: data => {
-        this.results = data.map(dto => PrivateLeasing.fromDTO(dto));
+        const mapped = data.map(dto => PrivateLeasing.fromDTO(dto));
+        this.results.set(mapped);
         this.applyFilter();
+        this.loading.set(false);
       },
-      error: err => {
-        console.error('Failed to load leasing offers', err);
-      },
+      error: () => this.loading.set(false)
     });
   }
 
-  handleFilterChange(filter: Filter): void {
-    this.filter = filter;
-    if (this.results.length > 0) this.applyFilter();
+  handleFilterChange(filter: Filter) {
+    this.filter.set(filter);
+    this.applyFilter();
   }
 
-  private applyFilter(): void {
-    if (this.filter) {
-      this.filteredResults = this.results.filter(r =>
-        this.filter!.fuelTypes.includes(r.fuelType) &&
-        this.filter!.brands.includes(r.brand));
+  private applyFilter() {
+    const filter = this.filter();
+    const results = this.results();
 
-      this.filteredResults.sort((a, b) => {
-        const valueA = this.filter!.sortValue === 'monthlyCost' ? a.getTotalMonthlyCost() : a.getTotalCostForFullLeaseInSek();
-        const valueB = this.filter!.sortValue === 'monthlyCost' ? b.getTotalMonthlyCost() : b.getTotalCostForFullLeaseInSek();
-        if (this.filter!.sortDirection === 'asc') {
-          return valueA - valueB;
-        } else {
-          return valueB - valueA;
-        }
-      });
-    } else {
-      this.filteredResults = this.results;
-      console.log('No filter applied, showing all results.');
+    if (!filter) {
+      this.filteredResults.set(results);
+      return;
     }
+
+    this.filteredResults.set(
+      results
+        .filter(r =>
+          filter.fuelTypes.includes(r.fuelType) &&
+          filter.brands.includes(r.brand)
+        )
+        .sort((a, b) => {
+          const va = filter.sortValue === 'monthlyCost'
+            ? a.getTotalMonthlyCost()
+            : a.getTotalCostForFullLeaseInSek();
+          const vb = filter.sortValue === 'monthlyCost'
+            ? b.getTotalMonthlyCost()
+            : b.getTotalCostForFullLeaseInSek();
+          return filter.sortDirection === 'asc' ? va - vb : vb - va;
+        })
+    );
   }
 
-  getAllUniqueBrands(): string[] {
-    if (!this.results) return []
-    return Array.from(new Set(this.results.map(r => r.brand)))
-  }
+
+  allUniqueBrands = computed(() => {
+    return Array.from(new Set(this.results().map(r => r.brand)))
+  })
 
 }
