@@ -1,4 +1,4 @@
-<div class="relative flex flex-col gap-y-4 h-screen">
+<div class="relative flex flex-col gap-y-4 h-screen w-screen items-center justify-center">
 
     <app-header></app-header>
 
@@ -15,12 +15,27 @@
     </div>
     }
 
-    <!-- Alltid renderad -->
-    <app-result-filter [brands]="allUniqueBrands()" (filterChange)="handleFilterChange($event)">
+    <app-result-filter class="w-full flex items-center justify-center" [brands]="allUniqueBrands()"
+        (filterChange)="handleFilterChange($event)">
     </app-result-filter>
 
-    <div class="grid grid-cols-4 gap-4 p-4 overflow-y-auto flex-1">
-        <app-private-leasing-result *ngFor="let r of filteredResults()" [privateLeasing]="r">
-        </app-private-leasing-result>
+    <!-- Inga resultat -->
+    @if (!loading() && filteredResults().length === 0) {
+    <div class="flex flex-col items-center justify-center flex-1 text-gray-500 gap-2">
+        <span class="text-lg font-medium">
+            Inga resultat matchar ditt filter
+        </span>
+        <span class="text-sm">
+            Testa att justera dina val eller rensa filtret
+        </span>
     </div>
+    } @else {
+    <!-- Resultat -->
+    <div class="grid grid-cols-4 gap-4 p-4 overflow-y-auto flex-1">
+        @for (r of filteredResults(); track r.sourceUrl) {
+        <app-private-leasing-result [privateLeasing]="r">
+        </app-private-leasing-result>
+        }
+    </div>
+    }
 </div>

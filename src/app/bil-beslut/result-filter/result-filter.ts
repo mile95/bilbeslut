@@ -32,9 +32,8 @@ export class ResultFilter {
   ];
 
   readonly fuelTypes = Object.values(FuelType);
-  readonly sortOptions: { value: 'monthlyCost' | 'totalCost', label: string }[] = [
+  readonly sortOptions: { value: 'monthlyCost', label: string }[] = [
     { value: 'monthlyCost', label: 'Månadskostnad' },
-    { value: 'totalCost', label: 'Total kostnad' },
   ];
   readonly sortDirections: { value: 'asc' | 'desc', label: string }[] = [
     { value: 'asc', label: 'Lägst först' },
