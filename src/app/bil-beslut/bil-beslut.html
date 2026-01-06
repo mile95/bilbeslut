@@ -1,6 +1,7 @@
 <div class="flex flex-col gap-y-4 h-screen">
     <app-header></app-header>
-    <app-result-filter (filterChange)="handleFilterChange($event)"></app-result-filter>
+    <app-result-filter [brands]="this.getAllUniqueBrands()" (filterChange)="handleFilterChange($event)">
+    </app-result-filter>
 
     <div class="grid grid-cols-4 gap-4 p-4 min-w-max grow overflow-y-auto" style="max-height: calc(100vh - 300px);">
         <ng-container *ngFor="let r of this.filteredResults">

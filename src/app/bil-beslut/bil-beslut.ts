@@ -18,8 +18,6 @@ export class BilBeslut implements OnInit {
   filteredResults: PrivateLeasing[] = [];
   filter: Filter | null = null;
 
-  loadFromBackend = true;
-
   constructor(private leasingFetcher: LeasingFetcher) { }
 
   ngOnInit(): void {
@@ -62,6 +60,11 @@ export class BilBeslut implements OnInit {
       this.filteredResults = this.results;
       console.log('No filter applied, showing all results.');
     }
+  }
+
+  getAllUniqueBrands(): string[] {
+    if (!this.results) return []
+    return Array.from(new Set(this.results.map(r => r.brand)))
   }
 
 }

@@ -1,5 +1,5 @@
 import { NgClass, NgFor } from '@angular/common';
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { FuelType } from '../private-leasing/private-leasing.model';
 import { EventEmitter } from '@angular/core';
 
@@ -23,13 +23,13 @@ export class Filter {
 export class ResultFilter implements OnInit {
 
   @Output() filterChange = new EventEmitter<Filter>();
+  @Input() brands: string[] = []
 
   readonly alternatives: { name: string, enabled: boolean }[] = [
     { name: 'Privatleasing', enabled: true },
   ];
 
   readonly fuelTypes = Object.values(FuelType);
-  readonly brands: string[] = ['Volvo', 'Volkswagen', 'Audi', 'Skoda', 'Citroën', 'Tesla', 'Toyota'];
   readonly sortOptions: { value: 'monthlyCost' | 'totalCost', label: string }[] = [
     { value: 'monthlyCost', label: 'Månadskostnad' },
     { value: 'totalCost', label: 'Total kostnad' },
