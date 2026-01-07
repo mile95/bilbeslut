@@ -58,25 +58,37 @@
             <span>{{ privateLeasing.baseCost | number }} kr</span>
         </div>
         <div class="flex justify-between">
-            <span>Försäkring</span>
-            <span>{{ privateLeasing.insuranceCost | number }} kr</span>
-        </div>
-        <div class="flex justify-between">
             <span>Vinterdäck</span>
             <span>{{ privateLeasing.winterTiresCost | number }} kr</span>
         </div>
         <div class="flex justify-between">
+            <span>Försäkring</span>
+            <span> ≈ {{ privateLeasing.insuranceCost | number }} kr</span>
+        </div>
+
+        <div class="flex justify-between">
             <span>Bränsle / El</span>
-            <span>{{ privateLeasing.estimatedFuelOrElectricity | number }} kr</span>
+            <span> ≈ {{ privateLeasing.estimatedFuelOrElectricity | number }} kr</span>
         </div>
         <div class="flex justify-between">
             <span>Fordonsskatt</span>
-            <span>{{ privateLeasing.getTaxCostPerMonth() | number }} kr</span>
+            <span> ≈ {{ privateLeasing.taxCost | number }} kr</span>
         </div>
-        <div class="flex justify-between">
+        <div class="flex justify-between items-center">
             <span>Service</span>
-            <span>{{ privateLeasing.serviceCost| number }} kr</span>
+
+            @if (privateLeasing.serviceCost === 0) {
+            <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold
+                   rounded-full bg-green-100 text-green-700">
+                Ingår
+            </span>
+            } @else {
+            <span class="font-medium">
+                {{ privateLeasing.serviceCost | number }} kr
+            </span>
+            }
         </div>
+
     </div>
 
     <!-- Footer -->
